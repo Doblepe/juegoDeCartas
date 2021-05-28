@@ -1,3 +1,4 @@
+
 const URL_MONGO =
 	'mongodb+srv://vicdoblepe:vicdoblepe2@cards-game.skn15.mongodb.net/Cards-game?retryWrites=true&w=majority';
 
