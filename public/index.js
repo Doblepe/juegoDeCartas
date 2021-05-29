@@ -126,3 +126,58 @@ function resetearJuego() {
 		colorCambio(i, 'black', '?');
 	}
 }
+//---------------------------------------------------------------------- ESTO ES RUTAS --------------------------------------------------------------------------------------------
+show()
+function show(){
+
+	fetch("/scores").then(function(respuesta){
+		return respuesta.json()
+	}).then(function(datos){
+		datos.error
+		? document.getElementById("feedback").innerHTML =`<h3>Ha ocurrido un fallo</h3>`
+		: print(datos)
+	})
+}
+
+function addPlayer(){
+    fetch("/player", 
+    {method: "POST",
+    headers: {
+        "Content-Type" : "application/json"
+    },
+    body: JSON.stringify({player: document.getElementById("player").value,
+score: 0})
+}).then(function(respuesta){
+    return respuesta.json()
+}).then(function(datos){
+    datos.insertedCount >=1
+    ? (document.getElementById("feedback").innerHTML =`<h3>Se ha grabado correctamente ${datos.contenido[0].player}</h3>`, show())
+    : document.getElementById("feedback").innerHTML = `<h3>No se ha guardado correctamente</h3>`
+
+})
+}
+
+function updateScore(){
+    fetch("/edit", {method: "PUT",
+    headers: {
+        "Content-Type" : "application/json"
+    },
+    body: JSON.stringify({player: document.getElementById("player").value,
+score: document.getElementById("score").value})
+}).then(function(respuesta){
+    return respuesta.json()
+}).then(function(datos){
+    datos.modifiedCount = 1
+    ? (document.getElementById("feedback").innerHTML =`<h3>Se ha modificado correctamente ${datos.contenido[0].score}</h3>`, show())
+    : document.getElementById("feedback").innerHTML = `<h3>No se ha guardado correctamente</h3>`
+})
+}
+
+function print(datos){
+	let parrafo = ""
+	for (let i = 0; i < datos.contenido.length; i++) {
+		parrafo += `<tr><td>${datos.contenido[i].player}</td><td>${datos.contenido[i].score}</td></tr>`
+	}
+	document.getElementById("scores").innerHTML = `<table><th>player:</th><th>scores</th>${parrafo}</table>`
+}
+//
