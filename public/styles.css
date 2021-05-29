@@ -1,34 +1,74 @@
+
+#body{
+	background-image: url(diseño/fondo.png);
+
+}
+#bodyjuego{
+	background-image: url(diseño/introopb.png);
+
+}
 #juego {
+
 	opacity: 0.3;
 	width: 600px;
 	height: 600px;
 }
 
 table {
+
 	width: 100%;
 	height: 100%;
+}
+#portada{
+	height: 150px;
+	left: 50px;
+	position: relative;
+	top: 340px;
+	margin-left: 10%;
+    padding: 15px 45px 15px 45px;
+    color:rgb(209, 68, 68);
+    text-decoration: none;
+    background-color:white;
+	font-size: 45px;
+
 }
 
 td {
 	width: 25%;
 	height: 25%;
-	background-color: black;
-	border: 3px solid black;
+	background-image: url(diseño/card1.png);
+	border: 3px solid rgb(112, 160, 224);
 	border-radius: 5px;
+	transform: perspective(450px) rotateY(0);
+
 }
+
+
+
 
 .letra {
 	color: white;
 	font-size: 40px;
 	text-align: center;
 	font-style: italic;
+	
+
 }
 
 input {
 	width: 90px;
 	height: 30px;
+
 }
 
 .centrar {
-	margin-left: 210px;
+	margin-left: 43.1%
+	}
+.centrar2 {
+	margin-left: 27.5%;
+	}
+	
+.ajustarimagenes{
+margin-right: 35px;
+width: AUTO; height: auto;
 }

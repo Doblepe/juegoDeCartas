@@ -108,7 +108,10 @@ function comprobar() {
 	}
 
 	if (aciertos == 16) {
-		document.getElementById('juego').innerHTML = 'GANASTE';
+		document.getElementById('ganador').innerHTML = `
+		<img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" >`
+
+		
 	}
 }
 
