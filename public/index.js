@@ -23,6 +23,14 @@ var jugada2 = '';
 var identificadorJ1 = '';
 var identificadorJ2 = '';
 
+let contador = 2;
+function puntuacion(){
+	contador = contador - 1;
+	document.getElementById('contador').innerHTML = (`<div>Te quedan ${contador} intentos</div>`)
+	return contador;
+}
+contador();
+
 function iniciarJuego() {
 	var dato = document.getElementById('juego');
 	dato.style.opacity = 1;
@@ -35,6 +43,8 @@ function iniciarJuego() {
 		var dato = document.getElementById(i.toString());
 		dato.dataset.valor = carta;
 	}
+	document.getElementById('contador').innerHTML = (`<div>Te quedan ${contador} intentos</div>`)
+
 }
 
 function resetearJuego() {
@@ -74,6 +84,14 @@ function girarCarta() {
 				colorCambio(self.identificadorJ1, 'black', '?');
 				colorCambio(self.identificadorJ2, 'black', '?');
 				vaciar();
+				puntuacion();
+				if(contador == 0){
+					document.getElementById('juego').innerHTML = 
+					`<div id="volver"><h1>PERDISTE</h1><input type="button" value="Iniciar" onclick="volver()" /></div> `
+					contador = 2;
+					document.getElementById('contador').innerHTML = ``
+					
+				}
 			}, 200);
 
 			colorCambio(identificadorJ2, 'blue', jugada2);
@@ -108,10 +126,13 @@ function comprobar() {
 	}
 
 	if (aciertos == 16) {
-		document.getElementById('ganador').innerHTML = `
-		<img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" >`
+
+		contador = 2;
+		document.getElementById('juego').innerHTML = 
+		`<img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><h1>GANASTE</h1><p>Tu puntuación es ${contador*5}</p><input type="button" value="Iniciar" onclick="volver()" /></div> `
 
 		
+		//fetch enviando la variable ${contador*5}
 	}
 }
 
@@ -126,6 +147,43 @@ function resetearJuego() {
 		colorCambio(i, 'black', '?');
 	}
 }
+
+
+function volver(){
+	contador = 2;
+	document.getElementById('juego').innerHTML = `<div id="juego">
+	<div id="contador"></div>
+	<table>
+	  <tr>
+		<td id="0" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="1" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="2" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="3" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+	  </tr>
+	  <tr>
+		<td id="4" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="5" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="6" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="7" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+	  </tr>
+	  <tr>
+		<td id="8" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="9" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="10" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="11" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+	  </tr>
+	  <tr>
+		<td id="12" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="13" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="14" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+		<td id="15" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
+	  </tr>
+	  </table>
+  </div>
+`
+}
+
+
 //---------------------------------------------------------------------- ESTO ES RUTAS --------------------------------------------------------------------------------------------
 show()
 function show(){
