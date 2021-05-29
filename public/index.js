@@ -124,8 +124,6 @@ function comprobar() {
 		document.getElementById('juego').innerHTML = 
 		`<div id="juego"><h1>GANASTE</h1><p>Tu puntuación es ${contador*5}</p><input type="button" value="Iniciar" onclick="volver()" /></div> `
 
-		document.getElementById('juego').innerHTML = 
-		`<`;
 		//fetch enviando la variable ${contador*5}
 	}
 }
