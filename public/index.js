@@ -23,7 +23,7 @@ var jugada2 = '';
 var identificadorJ1 = '';
 var identificadorJ2 = '';
 
-let contador = 2;
+let contador = 20;
 function puntuacion(){
 	contador = contador - 1;
 	document.getElementById('contador').innerHTML = (`<div>Te quedan ${contador} intentos</div>`)
@@ -127,9 +127,8 @@ function comprobar() {
 
 	if (aciertos == 16) {
 
-		contador = 2;
-		document.getElementById('juego').innerHTML = 
-		`<img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><h1>GANASTE</h1><p>Tu puntuación es ${contador*5}</p><input type="button" value="Iniciar" onclick="volver()" /></div> `
+		document.getElementById('body').innerHTML = 
+		`<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Tu puntuación es ${contador*5}</p><input type="button" value="Iniciar" onclick="volver()" /></div> </body>`
 
 		
 		//fetch enviando la variable ${contador*5}
@@ -150,36 +149,132 @@ function resetearJuego() {
 
 
 function volver(){
-	contador = 2;
-	document.getElementById('juego').innerHTML = `<div id="juego">
-	<div id="contador"></div>
-	<table>
-	  <tr>
-		<td id="0" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="1" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="2" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="3" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-	  </tr>
-	  <tr>
-		<td id="4" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="5" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="6" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="7" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-	  </tr>
-	  <tr>
-		<td id="8" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="9" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="10" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="11" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-	  </tr>
-	  <tr>
-		<td id="12" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="13" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="14" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-		<td id="15" class="letra" onclick="girarCarta()" data-valor="valor">?</td>
-	  </tr>
-	  </table>
-  </div>
+	contador = 20;
+	document.getElementById('body').innerHTML = `<body id="body"><div id="contador"></div>
+	<div id="ganador">
+      <div id="juego" class="centrar2">
+        <table>
+          <tr>
+            <td
+              id="0"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="1"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="2"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="3"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+          </tr>
+          <tr>
+            <td
+              id="4"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="5"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="6"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="7"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+          </tr>
+          <tr>
+            <td
+              id="8"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="9"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="10"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="11"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+          </tr>
+          <tr>
+            <td
+              id="12"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="13"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="14"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+            <td
+              id="15"
+              class="letra"
+              onclick="girarCarta()"
+              data-valor="valor"
+            ></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+	<div class="centrar">
+      <input type="button" value="Iniciar" onclick="iniciarJuego()" />
+      <input type="button" value="Reset" onclick="resetearJuego()" />
+    </div>
+    <div>
+      <input type="text" placeholder="write your name player" id="player" />
+      <input type="text" placeholder="change the score" id="score" />
+      <button onclick="updateScore()">cambiar correctamente</button>
+      <button onclick="addPlayer()">añadir jugador</button>
+    </div>
+    <div id="feedback"></div>
+    <div id="scores"></div>
+    <script src="index.js"></script>
+  </body>
 `
 }
 
