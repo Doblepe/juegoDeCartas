@@ -130,9 +130,15 @@ function comprobar() {
 		document.getElementById('body').innerHTML = 
 		`<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Tu puntuación es ${contador*5}</p><input type="button" value="Iniciar" onclick="volver()" /></div> </body>`
 
-		
-		//fetch enviando la variable ${contador*5}
-	}
+		fetch("/editar", {
+			method: "POST",
+			headers: {
+			  "Content-Type": "application/json",
+			},
+			body: JSON.stringify(`${contador*5}`),
+		  });
+		}
+	
 }
 
 function resetearJuego() {
