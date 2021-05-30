@@ -1,0 +1,16 @@
+{
+  "name": "Card-game",
+  "version": "1.0.0",
+  "description": "Juego de cartas creado por el equipo de los Ayudantes de Santa Claus molón.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongo": "^0.1.0"
+  }
+}
