@@ -1,0 +1,141 @@
+
+#body{
+	background-image: url(diseño/fondo.png);
+	background-attachment: fixed;
+
+}
+#bodyjuego{
+	background-image: url(diseño/introopb.png);
+	background-attachment: fixed;
+
+}
+.player{
+	position: relative;
+	bottom: 625px;
+	margin-left: 30px;
+    padding: 0px 20px 0px 20px;
+}
+.player2{
+	position: relative;
+	bottom: 600px;
+	margin-left: 40px;
+    padding: 0px 20px 0px 20px;
+}
+.player3{
+	position: relative;
+	bottom: 600px;
+	margin-left: 45px;
+    padding: 0px 20px 0px 20px;
+}
+.player4{
+	position: relative;
+	bottom: 600px;
+	margin-left: 1005px;
+    padding: 0px 20px 0px 20px;
+	color:rgb(61, 104, 153);
+
+}
+#juego {
+	opacity: 0.3;
+	width: 600px;
+	height: 600px;
+}
+
+table {
+
+	width: 100%;
+	height: 100%;
+}
+#portada{
+	height: 150px;
+	left: 50px;
+	position: relative;
+	top: 340px;
+	margin-left: 10%;
+    padding: 15px 45px 15px 45px;
+    color:rgb(209, 68, 68);
+    text-decoration: none;
+    background-color:white;
+	font-size: 45px;
+}
+#portada2{
+
+	position: relative;
+    padding: 15px 45px 15px 45px;
+    color:rgb(209, 68, 68);
+    text-decoration: none;
+    background-color:white;
+	font-size: 25px;
+}
+#volver{
+	color:white;
+	font-size: 15px;
+	position: relative;
+	bottom: 575px;
+	margin-left: 5%;
+	font-size: 45px;
+	justify-content: center;
+}
+#contador{
+	color:rgb(112, 160, 224);
+	font-size: 10px;
+	position: relative;
+	bottom: 575px;
+	margin-left: 75%;
+	font-size: 45px;
+
+}
+
+#jugador{
+
+	position: relative;
+	top: 100px;
+	margin-left: 40px;
+    padding: 0px 25px 0px 43px;
+}
+.botoncillo{
+	position: relative;
+	top: 90px;
+	margin-left: 10px;
+    padding: 5px;
+    color:white;
+    background-color:rgb(46, 107, 185);
+	font-size: 15px;
+}
+
+td {
+	width: 25%;
+	height: 25%;
+	background-image: url(diseño/card1.png);
+	border: 3px solid rgb(112, 160, 224);
+	border-radius: 5px;
+	transform: perspective(450px) rotateY(0);
+
+}
+
+.letra {
+	color: white;
+	font-size: 40px;
+	text-align: center;
+	font-style: italic;
+
+
+}
+
+input {
+	width: 90px;
+	height: 30px;
+
+}
+
+.centrar {
+	margin-left: 43.1%
+	}
+.centrar2 {
+	margin-left: 27.5%;
+	}
+
+.ajustarimagenes{
+margin-right: 35px;
+width: AUTO; height: auto;
+}
