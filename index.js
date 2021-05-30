@@ -51,7 +51,7 @@ app.get("/bestscores", function(req,res){
 })
 
 app.post("/player", function(req,res){
-    db.collection("Users").insertOne({player: req.body.player, score: 0}, function(err, data){
+    db.collection("Users").insertOne({user: req.body.user, score: 0}, function(err, data){
         err
 		? res.send({error: true, contenido: error})
 		: res.send({error: false, contenido: data})
@@ -61,10 +61,10 @@ app.post("/player", function(req,res){
 
 
 app.put("/edit", function(req, res){
-    db.collection("Users").updateOne({player: req.body.player},{$set:{score: req.body.score}}, function(err, data){
+    db.collection("Users").updateOne({user: req.body.user},{$set:{score: req.body.score}}, function(err, data){
         err
 		? res.send({error: true, contenido: error})
 		: res.send({error: false, contenido: data})  
     })
 })
-app.listen(process.env.PORT || 3000);   
+app.listen(process.env.PORT || 3001);   
