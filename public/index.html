@@ -127,10 +127,12 @@
           </div>
           <div id="contador"></div>
           <div>
-            <input type="text" placeholder="write your name player" id="player">
-            <input type="text" placeholder="change the score" id="score">
-            <button onclick="updateScore()">cambiar correctamente</button>
-            <button onclick="addPlayer()">añadir jugador</button>
+            <input type="text" placeholder="Write your name" id="player" class="player"/>
+            <input type="text" placeholder="Change the score" id="score" class="player" />
+            <br>
+            <button onclick="addPlayer()"class="player2">New player</button>
+            <button onclick="updateScore()"class="player3">Change score</button>
+            
         </div>
         <div id="feedback">
           
@@ -138,8 +140,10 @@
         <div id="scores">
     
         </div>
-        <div><h3>Ranking</h3></div>
-        <div id="bestScores">
+        <div class="player4">
+          <h2>Ranking</h2>
+        </div>
+        <div id="bestScores" class="player4">
             <div>
                 
             </div>
