@@ -135,8 +135,8 @@ function comprobar() {
 			body: JSON.stringify(`${contador*5}`),
 		  });
 		  document.getElementById('body').innerHTML = 
-		  `<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Has conseguido<br>${contador*5} puntos</p><a href="juego.html" id="portada2"> Inicio</a></div> </body>`, updateScore()
-  
+		  `<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Has conseguido<br>${contador*5} puntos</p><a href="juego.html" id="portada2"> Inicio</a></div> </body>`, 
+			  updateScore();  
 		}
 	
 }
