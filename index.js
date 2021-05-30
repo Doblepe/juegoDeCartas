@@ -1,5 +1,5 @@
 
-const URL_MONGO =
+/*const URL_MONGO =
 	'mongodb+srv://vicdoblepe:vicdoblepe2@cards-game.skn15.mongodb.net/Cards-game?retryWrites=true&w=majority';
 
 // Código para conectar por compass : mongodb+srv://vicdoblepe:vicdoblepe2@cards-game.skn15.mongodb.net/Cards-game?retryWrites=true&w=majority
@@ -16,16 +16,51 @@ let db;
 	err ? console.log(err) : (db = client.db('Cards-game'));
 });
 app.listen(process.env.PORT || 3000);
+	'mongodb+srv://vicdoblepe:vicdoblepe2@cards-game.skn15.mongodb.net/Cards-game?retryWrites=true&w=majority';
+*/
+const express = require('express');
+const mongodb = require('mongodb');
+const app = express();
+let MongoClient = mongodb.MongoClient;
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static('public'));
 
-const URL_MONGO =
-	'mongodb+srv://vicdoblepe:vicdoblepe2@cards-game.skn15.mongodb.net/Cards-game?retryWrites=true&w=majority'; */
+let db;
 
-const MongoClient = require('mongodb').MongoClient;
-const uri =
-	'mongodb+srv://vicdoblepe:<password>@cards-game.skn15.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect((err) => {
-	const collection = client.db('cards-game').collection('users');
-	// perform actions on the collection object
-	client.close();
+MongoClient.connect("mongodb+srv://vicdoblepe:vicdoblepe2@cards-game.skn15.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+	err ? console.log(err) : (db = client.db("Cards-game"));
 });
+
+app.get("/scores", function(req,res){
+	db.collection("Users").find().toArray(function(error, data){
+		error
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})
+	  })
+})
+
+app.get("/bestscores", function(req,res){
+    db.collection("Users").find().sort({score:-1}).limit(10).toArray(function(err,data){
+        err
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})
+    })
+})
+
+app.post("/player", function(req,res){
+    db.collection("Users").insertOne({user: req.body.user, score: 0}, function(err, data){
+        err
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})
+    })
+})
+
+app.put("/edit", function(req, res){
+    db.collection("Users").updateOne({user: req.body.user},{$set:{score: req.body.score}}, function(err, data){
+        err
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})  
+    })
+})
+app.listen(process.env.PORT || 3001);   
