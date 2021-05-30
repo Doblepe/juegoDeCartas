@@ -26,7 +26,7 @@ var identificadorJ2 = '';
 let contador = 20;
 function puntuacion(){
 	contador = contador - 1;
-	document.getElementById('contador').innerHTML = (`<div>Te quedan ${contador} intentos</div>`)
+	document.getElementById('contador').innerHTML = (`<div>Te quedan <br> ${contador} intentos</div>`)
 	return contador;
 }
 contador();
@@ -43,7 +43,7 @@ function iniciarJuego() {
 		var dato = document.getElementById(i.toString());
 		dato.dataset.valor = carta;
 	}
-	document.getElementById('contador').innerHTML = (`<div>Te quedan ${contador} intentos</div>`)
+	document.getElementById('contador').innerHTML = (`<div>Te quedan <br> ${contador} intentos</div>`)
 
 }
 

@@ -9,9 +9,14 @@
   </head>
 
   <body id="body">
-    <div id="tabla">
-    <div id="contador"></div>
+    <div class="centrar">
+      <input type="button" value="Iniciar" onclick="iniciarJuego()" />
+      <input type="button" value="Reset" onclick="resetearJuego()" />
+    </div>
+
     <div id="ganador">
+       
+      <div id="tabla">
       <div id="juego" class="centrar2">
         <table>
           <tr>
@@ -118,21 +123,21 @@
               data-valor="valor"
             ></td>
           </tr>
-        </table>
-      </div>
-    </div>
-    </div>
 
-    <div class="centrar">
-      <input type="button" value="Iniciar" onclick="iniciarJuego()" />
-      <input type="button" value="Reset" onclick="resetearJuego()" />
+                  </table>
+          </div>
+          <div id="contador"></div>
+          <div>
+            <input type="text" placeholder="Write your name" id="player" class="player"/>
+            <input type="text" placeholder="Change the score" id="score" class="player" />
+            <br>
+            <button onclick="addPlayer()"class="player2">New player</button>
+            <button onclick="updateScore()"class="player3">Change score</button>
+            
+        </div>
     </div>
-    <div>
-      <input type="text" placeholder="write your name player" id="player" />
-      <input type="text" placeholder="change the score" id="score" />
-      <button onclick="updateScore()">cambiar correctamente</button>
-      <button onclick="addPlayer()">añadir jugador</button>
     </div>
+   
     <div id="feedback"></div>
     <div id="scores"></div>
     <script src="index.js"></script>
