@@ -200,7 +200,7 @@ score: 0})
 }).then(function(respuesta){
     return respuesta.json()
 }).then(function(datos){
-    datos.insertedCount >=1
+    datos.contenido.insertedCount >=1
     ? (document.getElementById("feedback").innerHTML =`<h3>Se ha grabado correctamente</h3>`, show())
     : document.getElementById("feedback").innerHTML = `<h3>No se ha guardado correctamente</h3>`
 
