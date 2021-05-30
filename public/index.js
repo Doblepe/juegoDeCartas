@@ -175,7 +175,21 @@ function show(){
 		: print(datos)
 	})
 }
-
+showBestScores()
+function showBestScores(){
+    fetch("/bestscores").then(function(respuesta){
+        return respuesta.json()
+    }).then(function(datos){
+        if(datos.error){document.getElementById("feedback").innerHTML =`<h3>Ha ocurrido un fallo</h3>`
+    }else{
+        let parrafo = ""
+	    for (let i = 0; i < datos.contenido.length; i++) {
+		parrafo += `<tr><td>${datos.contenido[i].player}</td><td>${datos.contenido[i].score}</td></tr>`
+	}
+	document.getElementById("bestScores").innerHTML = `<table><th>player:</th><th>scores</th>${parrafo}</table>`
+    }
+    })
+}
 function addPlayer(){
     fetch("/player", 
     {method: "POST",
@@ -200,7 +214,7 @@ function updateScore(){
         "Content-Type" : "application/json"
     },
     body: JSON.stringify({player: document.getElementById("player").value,
-score: document.getElementById("score").value})
+score: parseInt(document.getElementById("score").value)})
 }).then(function(respuesta){
     return respuesta.json()
 }).then(function(datos){
@@ -209,6 +223,8 @@ score: document.getElementById("score").value})
     : document.getElementById("feedback").innerHTML = `<h3>No se ha guardado correctamente</h3>`
 })
 }
+
+
 
 function print(datos){
 	let parrafo = ""

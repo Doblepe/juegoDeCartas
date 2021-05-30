@@ -33,28 +33,38 @@ let db;
 MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
 	err ? console.log(err) : (db = client.db("jugador"));
 });
-	app.get("/scores", function(req,res){
-		db.collection("jugador").find().toArray(function(error, data){
-			error
-			? res.send({error: true, contenido: error})
-			: res.send({error: false, contenido: data})
-		  })
-	})
-	
-	app.post("/player", function(req,res){
-		db.collection("jugador").insertOne({player: req.body.player, score: 0}, function(err, data){
-			err
-			? res.send({error: true, contenido: error})
-			: res.send({error: false, contenido: data})
-		})
-	})
-	
-	app.put("/edit", function(req,res){
-		db.collection("jugador").updateOne({player: req.body.nombre},{$set: {score: parseInt(req.body.score)}}, function(err, data){
-			err
-			? res.send({error: true, contenido: error})
-			: res.send({error: false, contenido: data})
-		})
-	})
-	app.listen(process.env.PORT || 3000);   
-	
+
+app.get("/scores", function(req,res){
+	db.collection("jugador").find().toArray(function(error, data){
+		error
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})
+	  })
+})
+
+app.get("/bestscores", function(req,res){
+    db.collection("jugador").find().sort({score:-1}).limit(10).toArray(function(err,data){
+        err
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})
+    })
+})
+
+app.post("/player", function(req,res){
+    db.collection("jugador").insertOne({player: req.body.player, score: 0}, function(err, data){
+        err
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})
+    })
+})
+
+
+
+app.put("/edit", function(req, res){
+    db.collection("jugador").updateOne({player: req.body.player},{$set:{score: req.body.score}}, function(err, data){
+        err
+		? res.send({error: true, contenido: error})
+		: res.send({error: false, contenido: data})  
+    })
+})
+app.listen(process.env.PORT || 3000);   
