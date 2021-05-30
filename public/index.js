@@ -29,7 +29,6 @@ function puntuacion(){
 	document.getElementById('contador').innerHTML = (`<div>Te quedan <br> ${contador} intentos</div>`)
 	return contador;
 }
-contador();
 
 function iniciarJuego() {
 	var dato = document.getElementById('juego');
