@@ -184,7 +184,7 @@ function showBestScores(){
     }else{
         let parrafo = ""
 	    for (let i = 0; i < datos.contenido.length; i++) {
-		parrafo += `<tr><td>${datos.contenido[i].player}</td><td>${datos.contenido[i].score}</td></tr>`
+		parrafo += `<tr><td>${datos.contenido[i].users}</td><td>${datos.contenido[i].score}</td></tr>`
 	}
 	document.getElementById("bestScores").innerHTML = `<table><th>player:</th><th>scores</th>${parrafo}</table>`
     }
@@ -196,13 +196,13 @@ function addPlayer(){
     headers: {
         "Content-Type" : "application/json"
     },
-    body: JSON.stringify({player: document.getElementById("player").value,
+    body: JSON.stringify({player: document.getElementById("user").value,
 score: 0})
 }).then(function(respuesta){
     return respuesta.json()
 }).then(function(datos){
     datos.insertedCount >=1
-    ? (document.getElementById("feedback").innerHTML =`<h3>Se ha grabado correctamente ${datos.contenido[0].player}</h3>`, show())
+    ? (document.getElementById("feedback").innerHTML =`<h3>Se ha grabado correctamente ${datos.ops[0].user}</h3>`, show())
     : document.getElementById("feedback").innerHTML = `<h3>No se ha guardado correctamente</h3>`
 
 })
@@ -213,13 +213,13 @@ function updateScore(){
     headers: {
         "Content-Type" : "application/json"
     },
-    body: JSON.stringify({player: document.getElementById("player").value,
-score: parseInt(document.getElementById("score").value)})
+    body: JSON.stringify({player: document.getElementById("user").value,
+score: document.getElementById("score").value})
 }).then(function(respuesta){
     return respuesta.json()
 }).then(function(datos){
     datos.modifiedCount = 1
-    ? (document.getElementById("feedback").innerHTML =`<h3>Se ha modificado correctamente ${datos.contenido[0].score}</h3>`, show())
+    ? (document.getElementById("feedback").innerHTML =`<h3>Se ha modificado correctamente ${datos.ops[0].user}</h3>`, show())
     : document.getElementById("feedback").innerHTML = `<h3>No se ha guardado correctamente</h3>`
 })
 }
@@ -229,7 +229,7 @@ score: parseInt(document.getElementById("score").value)})
 function print(datos){
 	let parrafo = ""
 	for (let i = 0; i < datos.contenido.length; i++) {
-		parrafo += `<tr><td>${datos.contenido[i].player}</td><td>${datos.contenido[i].score}</td></tr>`
+		parrafo += `<tr><td>${datos.contenido[i].user}</td><td>${datos.contenido[i].score}</td></tr>`
 	}
 	document.getElementById("scores").innerHTML = `<table><th>player:</th><th>scores</th>${parrafo}</table>`
 }

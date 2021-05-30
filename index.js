@@ -30,12 +30,12 @@ app.use(express.static('public'));
 
 let db;
 
-MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
-	err ? console.log(err) : (db = client.db("jugador"));
+MongoClient.connect("mongodb+srv://vicdoblepe:vicdoblepe2@cards-game.skn15.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+	err ? console.log(err) : (db = client.db("Cards-game"));
 });
 
 app.get("/scores", function(req,res){
-	db.collection("jugador").find().toArray(function(error, data){
+	db.collection("Users").find().toArray(function(error, data){
 		error
 		? res.send({error: true, contenido: error})
 		: res.send({error: false, contenido: data})
@@ -43,7 +43,7 @@ app.get("/scores", function(req,res){
 })
 
 app.get("/bestscores", function(req,res){
-    db.collection("jugador").find().sort({score:-1}).limit(10).toArray(function(err,data){
+    db.collection("Users").find().sort({score:-1}).limit(10).toArray(function(err,data){
         err
 		? res.send({error: true, contenido: error})
 		: res.send({error: false, contenido: data})
@@ -51,7 +51,7 @@ app.get("/bestscores", function(req,res){
 })
 
 app.post("/player", function(req,res){
-    db.collection("jugador").insertOne({player: req.body.player, score: 0}, function(err, data){
+    db.collection("Users").insertOne({player: req.body.player, score: 0}, function(err, data){
         err
 		? res.send({error: true, contenido: error})
 		: res.send({error: false, contenido: data})
@@ -61,7 +61,7 @@ app.post("/player", function(req,res){
 
 
 app.put("/edit", function(req, res){
-    db.collection("jugador").updateOne({player: req.body.player},{$set:{score: req.body.score}}, function(err, data){
+    db.collection("Users").updateOne({player: req.body.player},{$set:{score: req.body.score}}, function(err, data){
         err
 		? res.send({error: true, contenido: error})
 		: res.send({error: false, contenido: data})  
