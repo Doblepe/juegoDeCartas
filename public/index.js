@@ -127,8 +127,6 @@ function comprobar() {
 
 	if (aciertos == 16) {
 
-		document.getElementById('body').innerHTML = 
-		`<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Tu puntuación es ${contador*5}</p><input type="button" value="Iniciar" onclick="volver()" /></div> </body>`
 
 		fetch("/editar", {
 			method: "POST",
@@ -137,6 +135,9 @@ function comprobar() {
 			},
 			body: JSON.stringify(`${contador*5}`),
 		  });
+		  document.getElementById('body').innerHTML = 
+		  `<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Has conseguido<br>${contador*5} puntos</p><input type="button" value="Iniciar" onclick="volver()" /></div> </body>`
+  
 		}
 	
 }

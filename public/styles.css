@@ -33,9 +33,18 @@ table {
 	font-size: 45px;
 
 }
+#volver{
+	color:white;
+	font-size: 15px;
+	position: relative;
+	bottom: 575px;
+	margin-left: 5%;
+	font-size: 45px;
+	justify-content: center;
+}
 #contador{
 	color:rgb(112, 160, 224);
-	font-size: 15px;
+	font-size: 10px;
 	position: relative;
 	bottom: 475px;
 	margin-left: 75%;
