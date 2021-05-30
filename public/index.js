@@ -1,167 +1,190 @@
-var cartas = new Array(
-	{ nombre: '1', seleccion: false },
-	{ nombre: '2', seleccion: false },
-	{ nombre: '3', seleccion: false },
-	{ nombre: '4', seleccion: false },
-	{ nombre: '5', seleccion: false },
-	{ nombre: '6', seleccion: false },
-	{ nombre: '7', seleccion: false },
-	{ nombre: '8', seleccion: false },
-	{ nombre: '1', seleccion: false },
-	{ nombre: '2', seleccion: false },
-	{ nombre: '3', seleccion: false },
-	{ nombre: '4', seleccion: false },
-	{ nombre: '5', seleccion: false },
-	{ nombre: '6', seleccion: false },
-	{ nombre: '7', seleccion: false },
-	{ nombre: '8', seleccion: false }
-);
+let cartas = [];
+for(let i = 0; i<2; i++){
+	for (let i = 0; i < 8; i++) {
+	  cartas.push({
+		nombre: `${i+1}`,
+		imagen: '',
+		seleccion: false
+	  });
+	}};
 
-var intentos = 0;
-var jugada1 = '';
-var jugada2 = '';
-var identificadorJ1 = '';
-var identificadorJ2 = '';
+	function pedirImagenes(){
+	fetch(
+		"https://www.googleapis.com/customsearch/v1?&lr=lang_es&imgType=photo&imgSize=medium&num=8&cr=countryES&searchType=image&exactTerms=regalo&key=AIzaSyAu0n7uaZIuWn5hG8QPFT_bkZP8putn2qQ&cx=fb380ab9962624ffa"
+	  )
+		.then(function (res) {
+		  return res.json();
+		})
+		.then(function (datos) {
+		  for(let i = 0; i<8; i++){
+			  cartas[i].imagen = datos.items[i].image.thumbnailLink;
+		  }
+		  for(let i = 0; i<8; i++){
+			cartas[i+8].imagen = datos.items[i].image.thumbnailLink;
+		}
+			return cartas && console.log(cartas);
+		})
+		return cartas;
+	}
+
+
+let parrafo = "";
+var jugada1 = "";
+var jugada2 = "";
+var identificadorJ1 = "";
+var identificadorJ2 = "";
 
 let contador = 20;
-function puntuacion(){
-	contador = contador - 1;
-	document.getElementById('contador').innerHTML = (`<div>Te quedan <br> ${contador} intentos</div>`)
-	return contador;
+function puntuacion() {
+  contador = contador - 1;
+  document.getElementById(
+    "contador"
+  ).innerHTML = `<div>Te quedan <br> ${contador} intentos</div>`;
+  return contador;
 }
 
+
+	
 function iniciarJuego() {
-	var dato = document.getElementById('juego');
-	dato.style.opacity = 1;
+	pedirImagenes();
 
-	cartas.sort(function () {
-		return Math.random() - 0.5;
-	});
-	for (var i = 0; i < 16; i++) {
-		var carta = cartas[i].nombre;
-		var dato = document.getElementById(i.toString());
-		dato.dataset.valor = carta;
-	}
-	document.getElementById('contador').innerHTML = (`<div>Te quedan <br> ${contador} intentos</div>`)
+      var dato = document.getElementById("juego");
+      dato.style.opacity = 1;
 
-}
+      cartas.sort(function () {
+        return Math.random() - 0.5;
+      });
+      for (var i = 0; i < 16; i++) {
+        var carta = cartas[i].nombre;
+        var dato = document.getElementById(i.toString());
+        dato.dataset.valor = carta;
+      }
+      document.getElementById(
+        "contador"
+      ).innerHTML = `<div>Te quedan <br> ${contador} intentos</div>`;
+	;
+
+	  }
+
+
 
 function resetearJuego() {
-	cartas.sort(function () {
-		return Math.random() - 0.5;
-	});
-	for (var i = 0; i < 16; i++) {
-		var carta = cartas[i].nombre;
-		var dato = document.getElementById(i.toString());
-		dato.dataset.valor = carta;
-		colorCambio(i, 'black', '?');
-	}
+  sort(function () {
+    return Math.random() - 0.5;
+  });
+  for (var i = 0; i < 16; i++) {
+    var carta = cartas[i].nombre;
+    var dato = document.getElementById(i.toString());
+    dato.dataset.valor = carta;
+    colorCambio(i, "black", "?");
+  }
 }
 
 function girarCarta() {
-	var evento = window.event;
+  var evento = window.event;
 
-	jugada2 = evento.target.dataset.valor;
-	identificadorJ2 = evento.target.id;
+  jugada2 = evento.target.dataset.valor;
+  identificadorJ2 = evento.target.id;
 
-	if (jugada1 !== '') {
-		if (
-			jugada1 === jugada2 &&
-			identificadorJ1 !== identificadorJ2 &&
-			cartas[parseInt(identificadorJ2)].seleccion != true &&
-			cartas[parseInt(identificadorJ1)].seleccion != true
-		) {
-			cartas[parseInt(identificadorJ1)].seleccion = true;
-			cartas[parseInt(identificadorJ2)].seleccion = true;
+  if (jugada1 !== "") {
+    if (
+      jugada1 === jugada2 &&
+      identificadorJ1 !== identificadorJ2 &&
+      cartas[parseInt(identificadorJ2)].seleccion != true &&
+      cartas[parseInt(identificadorJ1)].seleccion != true
+    ) {
+      cartas[parseInt(identificadorJ1)].seleccion = true;
+      cartas[parseInt(identificadorJ2)].seleccion = true;
 
-			colorCambio(identificadorJ2, 'blue', jugada2);
-			vaciar();
-			comprobar();
-		} else if (identificadorJ1 !== identificadorJ2) {
-			var self = this;
-			setTimeout(function () {
-				colorCambio(self.identificadorJ1, 'black', '?');
-				colorCambio(self.identificadorJ2, 'black', '?');
-				vaciar();
-				puntuacion();
-				if(contador == 0){
-					document.getElementById('juego').innerHTML = 
-					`<div id="volver"><h1>PERDISTE</h1><input type="button" value="Iniciar" onclick="volver()" /></div> `
-					contador = 2;
-					document.getElementById('contador').innerHTML = ``
-					
-				}
-			}, 200);
 
-			colorCambio(identificadorJ2, 'blue', jugada2);
-		}
-	} else if (jugada2 !== 'valor') {
-		colorCambio(identificadorJ2, 'blue', jugada2);
+	  document.getElementById(`${identificadorJ1}`).style.backgroundImage = `url('${cartas[identificadorJ1].imagen}')`
+	  document.getElementById(`${identificadorJ2}`).style.backgroundImage = `url('${cartas[identificadorJ1].imagen}')`
 
-		jugada1 = jugada2;
-		identificadorJ1 = identificadorJ2;
-	}
+
+      colorCambio(identificadorJ2, "blue", jugada2);
+      vaciar();
+      comprobar();
+    } else if (identificadorJ1 !== identificadorJ2) {
+      var self = this;
+      setTimeout(function () {
+        colorCambio(self.identificadorJ1, "black", "?");
+        colorCambio(self.identificadorJ2, "black", "?");
+        vaciar();
+        puntuacion();
+        if (contador == 0) {
+          document.getElementById(
+            "juego"
+          ).innerHTML = `<div id="volver"><h1>PERDISTE</h1><input type="button" value="Iniciar" onclick="volver()" /></div> `;
+          contador = 2;
+          document.getElementById("contador").innerHTML = ``;
+        }
+      }, 200);
+
+      colorCambio(identificadorJ2, "blue", jugada2);
+    }
+  } else if (jugada2 !== "valor") {
+    colorCambio(identificadorJ2, "blue", jugada2);
+
+    jugada1 = jugada2;
+    identificadorJ1 = identificadorJ2;
+  }
 }
 
 function vaciar() {
-	jugada1 = '';
-	jugada2 = '';
+  jugada1 = "";
+  jugada2 = "";
 
-	identificadorJ1 = '';
-	identificadorJ2 = '';
+  identificadorJ1 = "";
+  identificadorJ2 = "";
 }
 
 function colorCambio(posicion, color, contenido) {
-	document.getElementById(posicion.toString()).style.backgroundColor = color;
-	document.getElementById(posicion.toString()).innerHTML = contenido;
+  document.getElementById(posicion.toString()).style.backgroundColor = color;
+  document.getElementById(posicion.toString()).innerHTML = contenido;
 }
 
 function comprobar() {
-	var aciertos = 0;
-	for (var i = 0; i < 16; i++) {
-		if (cartas[i].seleccion == true) {
-			aciertos++;
-		}
+  var aciertos = 0;
+  for (var i = 0; i < 16; i++) {
+    if (cartas[i].seleccion == true) {
+      aciertos++;
+    }
+  }
+
+
+  if (aciertos == 16) {
+    fetch("/editar", {
+		method: "PUT",
+		headers: {
+		  "Content-Type": "application/json",
+		},
+		body: JSON.stringify(`${contador*5}`),
+	  });
+	  document.getElementById('body').innerHTML = 
+	  `<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Has conseguido<br>${contador*5} puntos</p><a href="juego.html" id="portada2"> Inicio</a></div> </body>`, 
+		  updateScore();  
 	}
 
-	if (aciertos == 16) {
-
-
-		fetch("/editar", {
-			method: "PUT",
-			headers: {
-			  "Content-Type": "application/json",
-			},
-			body: JSON.stringify(`${contador*5}`),
-		  });
-		  document.getElementById('body').innerHTML = 
-		  `<body id="body"><img src="diseño/ganador.png" alt="circulo" class="ajustarimagenes" ><div id="volver"><p>Has conseguido<br>${contador*5} puntos</p><a href="juego.html" id="portada2"> Inicio</a></div> </body>`, 
-			  updateScore();  
-		}
-	
 }
 
 function resetearJuego() {
-	cartas.sort(function () {
-		return Math.random() - 0.5;
-	});
-	for (var i = 0; i < 16; i++) {
-		var carta = cartas[i].nombre;
-		var dato = document.getElementById(i.toString());
-		dato.dataset.valor = carta;
-		colorCambio(i, 'black', '?');
-	}
+  sort(function () {
+    return Math.random() - 0.5;
+  });
+  for (var i = 0; i < 16; i++) {
+    var carta = cartas[i].nombre;
+    var dato = document.getElementById(i.toString());
+    dato.dataset.valor = carta;
+    colorCambio(i, "black", "?");
+  }
 }
 
-
-function volver(){
-	contador = 20;
-	document.getElementById('body').innerHTML = `<a href="juego.html" id="portada"> Jugar</a>`
-
-  
+function volver() {
+  contador = 20;
+  document.getElementById(
+    "body"
+  ).innerHTML = `<a href="juego.html" id="portada"> Jugar</a>`;
 }
-
-
 //---------------------------------------------------------------------- ESTO ES RUTAS --------------------------------------------------------------------------------------------
 show()
 function show(){
